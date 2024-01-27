@@ -5,6 +5,7 @@
 package com.myteam.testing_project;
 
 import com.myteam.triangle_1.Triangle_1;
+import com.myteam.triangle_4.Triangle_4;
 
 /**
  *
@@ -64,6 +65,11 @@ public class IndexFrame extends javax.swing.JFrame {
         jButton2.setText("Generate Cost Testcase");
 
         jButton3.setText("Generate Triangle2 Testcase");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,6 +104,11 @@ public class IndexFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         new Triangle_1().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        new Triangle_4().setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
