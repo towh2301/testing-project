@@ -4,6 +4,8 @@
  */
 package com.myteam.testing_project;
 
+import com.myteam.triangle_1.Triangle_1;
+
 /**
  *
  * @author huybu
@@ -15,6 +17,7 @@ public class IndexFrame extends javax.swing.JFrame {
      */
     public IndexFrame() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -93,6 +96,7 @@ public class IndexFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        new Triangle_1().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
