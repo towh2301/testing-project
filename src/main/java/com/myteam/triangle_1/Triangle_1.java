@@ -6,12 +6,15 @@ package com.myteam.triangle_1;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -183,6 +186,28 @@ public class Triangle_1 extends javax.swing.JFrame {
 
         // set JFrame to visible
         nestedFrame.setVisible(true);
+
+        // Get addtion listenner
+        button.addActionListener((ActionEvent e) -> {
+            String path = chooseDestination();
+            System.out.println(path + "/triangleTestcase.csv");
+            if (!path.isEmpty()) {
+                TriangleTestcaseGenerator.exportToCSV(path + "/triangleTestcase.csv", testcases);
+                JOptionPane.showMessageDialog(rootPane, "Export to " + path + "/triangleTestcase.csv" + " successfully!");
+            }
+        });
+    }
+
+    private static String chooseDestination() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+        int result = fileChooser.showOpenDialog(null);
+        String chosenPath = "";
+        if (result == JFileChooser.APPROVE_OPTION) {
+            chosenPath = fileChooser.getSelectedFile().getPath();
+        }
+        return chosenPath;
     }
 
     /**

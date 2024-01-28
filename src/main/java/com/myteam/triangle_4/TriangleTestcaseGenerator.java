@@ -66,7 +66,7 @@ public class TriangleTestcaseGenerator {
         }
 
         // export to csv
-        exportToCSV("src/main/java/com/myteam/triangle_1/triangleTestcase.csv", testcases);
+        //exportToCSV("src/main/java/com/myteam/triangle_1/triangleTestcase.csv", testcases);
         return testcases;
     }
 

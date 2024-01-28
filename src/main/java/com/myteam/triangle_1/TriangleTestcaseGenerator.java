@@ -67,7 +67,7 @@ public class TriangleTestcaseGenerator {
         }
 
         // export to csv
-        exportToCSV("src/main/java/com/myteam/triangle_1/triangleTestcase.csv", testcases);
+        //exportToCSV("src/main/java/com/myteam/triangle_1/triangleTestcase.csv", testcases);
         return testcases;
     }
 
@@ -77,14 +77,14 @@ public class TriangleTestcaseGenerator {
         int minPlus = min + 1;
         int maxMinus = max - 1;
 
-        if (inputCount == 5) {
-            test = new int[] { nom, minPlus, max, min, maxMinus };
-        } else if (inputCount == 7) {
-            int maxPlus = max + 1;
-            int minMinus = min - 1;
-            test = new int[] { nom, maxPlus, minPlus, max, min, maxMinus, minMinus };
-        } else {
-            throw new IllegalArgumentException("Invalid input count. Supported counts are 5 and 7.");
+        switch (inputCount) {
+            case 5 -> test = new int[] { nom, minPlus, max, min, maxMinus };
+            case 7 -> {
+                int maxPlus = max + 1;
+                int minMinus = min - 1;
+                test = new int[] { nom, maxPlus, minPlus, max, min, maxMinus, minMinus };
+            }
+            default -> throw new IllegalArgumentException("Invalid input count. Supported counts are 5 and 7.");
         }
         return test;
     }
@@ -106,8 +106,7 @@ public class TriangleTestcaseGenerator {
     public static void exportToCSV(String fileName, List<TriangleTestcase> testcases) {
         try (FileWriter writer = new FileWriter(fileName)) {
             for (TriangleTestcase testcase : testcases) {
-                writer.append(testcase.getSide1() + "," + testcase.getSide2() + "," + testcase.getSide3() + ","
-                        + testcase.getExpected() + "\n");
+                writer.append(testcase.getSide1() + "," + testcase.getSide2() + "," + testcase.getSide3() + "\n");
             }
             System.out.println("Test cases exported to " + fileName);
         } catch (IOException e) {
