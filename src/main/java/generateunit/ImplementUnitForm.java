@@ -4,6 +4,8 @@
  */
 package generateunit;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author penta
@@ -15,6 +17,7 @@ public class ImplementUnitForm extends javax.swing.JFrame {
      */
     public ImplementUnitForm() {
         initComponents();
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     /**
