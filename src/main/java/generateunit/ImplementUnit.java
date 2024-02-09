@@ -59,12 +59,14 @@ public class ImplementUnit {
                 s += "<";
                 for (int j = 1; j <= numberOfUnit; j++) {
                     if (j == i) {
-                        s += "X" + i + unit[k] + ", ";
+                        s += "X" + i + unit[k] ;
                     } else {
-                        s += "X" + j + "nom, ";
+                        s += "X" + j + "nom";
                     }
                     if (j == numberOfUnit) {
-                        s += ">";
+                        s += ">, ";
+                    }else{
+                        s+=", ";
                     }
                 }
             }
@@ -82,25 +84,30 @@ public class ImplementUnit {
         for (int i = 1; i <= numberOfUnit; i++) {
             
             for (int k = 0; k < unit.length; k++) {
-                s += "<";
-                for (int j = 1; j <= numberOfUnit; j++) {
-                    if(unit[k].equalsIgnoreCase("nom") && i!=1){
+                if(unit[k].equalsIgnoreCase("nom") && i!=1){
                         continue;
                     }else{
+                s += "<";
+                for (int j = 1; j <= numberOfUnit; j++) {
+                    
+                        
                     if (j == i) {
-                        s += "X" + i + unit[k] + ", ";
+                        s += "X" + i + unit[k];
                     } else {
-                        s += "X" + j + "nom, ";
+                        s += "X" + j + "nom";
                     }
                     if (j == numberOfUnit) {
-                        s += ">";
+                        s += ">, ";
+                    }else{
+                        s+=", ";
                     }
                     }
                 }
                 
             }
-            s+="}";
+            
         }
+        s+="}";
         this.computeSet=s;
         
     }
