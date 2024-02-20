@@ -9,31 +9,33 @@ package commission;
  * @author penta
  */
 public final class Material {
-    private int[] unit5;
-    private int[] unit7;
+    private int[] units;
+    public int nom;
     private int cost;
-    public int[] getUnit5() {
-        return unit5;
-    }
+    
 
-    public void setUnit5(int[] unit5) {
-        this.unit5 = unit5;
-    }
+   
 
-    public int[] getUnit7() {
-        return unit7;
-    }
-
-    public void setUnit7(int[] unit7) {
-        this.unit7 = unit7;
-    }
-
-    public Material(int max,int cost) {
+    public Material(int unit,int max,int cost) {
         this.cost= cost;
-        int[] unit5 ={1,2,max/2,max-1,max};
-        int[] unit7 = {0,1,2,max/2,max-1,max,max+1};
-        setUnit5(unit5);
-        setUnit7(unit7);
+        int[] unit5 ={1,2,max/2,max-1,max,cost};
+        nom=max/2;
+        int[] unit7 = {0,1,2,max/2,max-1,max,max+1,cost};
+        if(unit== 5){
+            units= unit5;
+        }else{
+            units=unit7;
+        }
+        
+        
+    }
+
+    public int[] getUnits() {
+        return units;
+    }
+
+    public void setUnits(int[] units) {
+        this.units = units;
     }
     
     

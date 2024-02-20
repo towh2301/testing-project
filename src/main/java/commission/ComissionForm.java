@@ -16,6 +16,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ComissionForm extends javax.swing.JFrame {
     private Material mt;
+    private Material locks;
+    private Material stocks;
+    private Material barrels;
+    
     /**
      * Creates new form ComissionForm
      */
@@ -265,25 +269,30 @@ public class ComissionForm extends javax.swing.JFrame {
         model.addColumn("Locks");
         model.addColumn("Stocks");
         model.addColumn("Barrels");
+        model.addColumn("Expected");
         
-        int[] locks = getMaterial(unit, Integer.parseInt(lockQuantitytf.getText()), Integer.parseInt(lockCost.getText()));
-        int[] stocks = getMaterial(unit, Integer.parseInt(stockQuantitytf.getText()), Integer.parseInt(stockCost.getText()));
-        int[] barrels = getMaterial(unit, Integer.parseInt(barrelQuantity.getText()), Integer.parseInt(barrelCost.getText()));
-        int nomLock = locks[unit/2];
-        int nomStock = stocks[unit/2];
-        int nomBarrel = barrels[unit/2];
-        for(int a:locks){
-            model.addRow(new Object[]{a,nomStock,nomBarrel});
-        }
-        for(int a:stocks) {
-            if(a==nomStock)
-                continue;
-            model.addRow(new Object[]{nomLock,a,nomBarrel});
-        }
-        for(int a:barrels) {
-            if(a==nomBarrel)
-                continue;
-            model.addRow(new Object[]{nomLock,nomStock,a});
+        locks = getMaterial(unit, Integer.parseInt(lockQuantitytf.getText()), Integer.parseInt(lockCost.getText()));
+        stocks = getMaterial(unit, Integer.parseInt(stockQuantitytf.getText()), Integer.parseInt(stockCost.getText()));
+        barrels = getMaterial(unit, Integer.parseInt(barrelQuantity.getText()), Integer.parseInt(barrelCost.getText()));
+        int nomLock = locks.getUnits()[unit/2];
+        int nomStock = stocks.getUnits()[unit/2];
+        int nomBarrel = barrels.getUnits()[unit/2];
+        int[][] allPart = new int[3][];
+        allPart[0]= locks.getUnits();
+        allPart[1]= stocks.getUnits();
+        allPart[2]= barrels.getUnits();
+        int[] nom = new int[3];
+        
+        for(int i=0;i<3;i++){
+            nom[0]=nomLock;
+            nom[1]=nomStock;
+            nom[2]=nomBarrel;
+            for(int a:allPart[i]){
+                if(i!=0 && a!=nom[i]){
+                    nom[i]=a;
+                    model.addRow(new Object[]{nom[0],nom[1],nom[2],commission(nom[0], nom[1], nom[2])});
+                }
+            }
         }
         
         JTable table = new JTable(model);
@@ -297,13 +306,32 @@ public class ComissionForm extends javax.swing.JFrame {
         tableFrame.setVisible(true);
         
     }
-    public int[] getMaterial(int unit,int max,int cost){
-        mt = new Material(max, cost);
-        if(unit==7) {
-            return mt.getUnit7();
-        }else{
-            return mt.getUnit5();
+    public double commission(int lock,int stock, int barrel){
+        double commission=0;
+        double sales = lock *locks.nom + stock * stocks.nom + barrel*barrels.nom;
+        if(lock==0 || stock ==0 || barrel == 0){
+            return 0;
         }
+        if (sales>1800)
+		{
+			commission=0.10*1000.0;
+			commission=commission+0.15*800;
+			commission=commission+0.20*(sales-1800.0);
+		}
+		else if(sales > 1000)
+			 {
+			commission =0.10*1000;
+			commission=commission+0.15*(sales-1000);
+			}
+		else
+			commission=0.10*sales;
+        
+		
+        return commission;
+    }
+    public Material getMaterial(int unit,int max,int cost){
+        mt = new Material(unit,max, cost);
+        return mt;
     }
     private void barrelCostKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_barrelCostKeyTyped
         // TODO add your handling code here:
