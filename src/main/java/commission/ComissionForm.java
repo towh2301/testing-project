@@ -256,6 +256,7 @@ public class ComissionForm extends javax.swing.JFrame {
         tableFrame.setLocationRelativeTo(null);
         
         DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Testcase");
         model.addColumn("Locks");
         model.addColumn("Stocks");
         model.addColumn("Barrels");
@@ -272,17 +273,18 @@ public class ComissionForm extends javax.swing.JFrame {
         allPart[1]= stocks.getUnits();
         allPart[2]= barrels.getUnits();
         int[] nom = new int[3];
-        
+        int count=1;
         for(int i=0;i<3;i++){
             nom[0]=nomLock;
             nom[1]=nomStock;
             nom[2]=nomBarrel;
             for(int a:allPart[i]){
-                if(i!=0 && a==nom[i]){
+                if(i!=0 && a==allPart[i][unit/2]){
                     continue;
                 }else{
                     nom[i]=a;
-                    model.addRow(new Object[]{nom[0],nom[1],nom[2],commission(nom[0], nom[1], nom[2])});
+                    model.addRow(new Object[]{count,nom[0],nom[1],nom[2],commission(nom[0], nom[1], nom[2])});
+                    count++;
                 }
             }
         }
