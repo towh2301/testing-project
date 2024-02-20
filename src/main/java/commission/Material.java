@@ -18,9 +18,9 @@ public final class Material {
 
     public Material(int unit,int max,int cost) {
         this.cost= cost;
-        int[] unit5 ={1,2,max/2,max-1,max,cost};
+        int[] unit5 ={1,2,max/2,max-1,max};
         nom=max/2;
-        int[] unit7 = {0,1,2,max/2,max-1,max,max+1,cost};
+        int[] unit7 = {0,1,2,max/2,max-1,max,max+1};
         if(unit== 5){
             units= unit5;
         }else{

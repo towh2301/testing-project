@@ -218,10 +218,7 @@ public class ComissionForm extends javax.swing.JFrame {
 
     private void lockQuantitytfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lockQuantitytfKeyTyped
                 // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        if(!Character.isDigit(c)){
-            evt.consume();
-        }
+        checkValidNumber(evt);
     }//GEN-LAST:event_lockQuantitytfKeyTyped
 
     private void lockCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lockCostActionPerformed
@@ -229,36 +226,29 @@ public class ComissionForm extends javax.swing.JFrame {
     }//GEN-LAST:event_lockCostActionPerformed
 
     private void lockCostKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lockCostKeyTyped
-            char c = evt.getKeyChar();
-        if(!Character.isDigit(c)){
-            evt.consume();
-        }        // TODO add your handling code here:
+         checkValidNumber(evt);    // TODO add your handling code here:
     }//GEN-LAST:event_lockCostKeyTyped
 
     private void stockQuantitytfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_stockQuantitytfKeyTyped
         // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        if(!Character.isDigit(c)){
-            evt.consume();
-        }
+        checkValidNumber(evt);
     }//GEN-LAST:event_stockQuantitytfKeyTyped
 
     private void stockCostKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_stockCostKeyTyped
         // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        if(!Character.isDigit(c)){
-            evt.consume();
-        }
+        checkValidNumber(evt);
     }//GEN-LAST:event_stockCostKeyTyped
 
     private void barrelQuantityKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_barrelQuantityKeyTyped
         // TODO add your handling code here:
+        checkValidNumber(evt);
+    }//GEN-LAST:event_barrelQuantityKeyTyped
+    public void checkValidNumber(java.awt.event.KeyEvent evt){
         char c = evt.getKeyChar();
         if(!Character.isDigit(c)){
             evt.consume();
         }
-    }//GEN-LAST:event_barrelQuantityKeyTyped
-   
+    }
     public void createTable(int unit) {
         JFrame tableFrame = new JFrame();
         tableFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -288,7 +278,9 @@ public class ComissionForm extends javax.swing.JFrame {
             nom[1]=nomStock;
             nom[2]=nomBarrel;
             for(int a:allPart[i]){
-                if(i!=0 && a!=nom[i]){
+                if(i!=0 && a==nom[i]){
+                    continue;
+                }else{
                     nom[i]=a;
                     model.addRow(new Object[]{nom[0],nom[1],nom[2],commission(nom[0], nom[1], nom[2])});
                 }
@@ -335,10 +327,7 @@ public class ComissionForm extends javax.swing.JFrame {
     }
     private void barrelCostKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_barrelCostKeyTyped
         // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        if(!Character.isDigit(c)){
-            evt.consume();
-        }
+        checkValidNumber(evt);
     }//GEN-LAST:event_barrelCostKeyTyped
 
     private void btn5UnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn5UnitActionPerformed
