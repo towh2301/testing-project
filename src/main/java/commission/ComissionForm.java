@@ -6,6 +6,7 @@ package commission;
 
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -333,13 +334,26 @@ public class ComissionForm extends javax.swing.JFrame {
     }//GEN-LAST:event_barrelCostKeyTyped
 
     private void btn5UnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn5UnitActionPerformed
+        if(isZero()){
+            JOptionPane.showMessageDialog(rootPane, "All inputs must better than 0!!");
+        }else
         createTable(5);
     }//GEN-LAST:event_btn5UnitActionPerformed
 
     private void btn7UnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn7UnitActionPerformed
+        if(isZero()){
+            JOptionPane.showMessageDialog(rootPane, "All inputs must better than 0!!");
+        }else
         createTable(7);
     }//GEN-LAST:event_btn7UnitActionPerformed
-
+    public boolean isZero(){
+        if(Integer.parseInt(lockQuantitytf.getText())==0 || Integer.parseInt(stockCost.getText())==0 || Integer.parseInt(lockCost.getText())==0 
+                || Integer.parseInt(stockQuantitytf.getText())==0 || Integer.parseInt(barrelQuantity.getText())==0 
+                || Integer.parseInt(barrelCost.getText())==0) {
+            return true;
+        }
+        return false;
+    }
     /**
      * @param args the command line arguments
      */
