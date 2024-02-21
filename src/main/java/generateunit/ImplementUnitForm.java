@@ -75,14 +75,14 @@ public class ImplementUnitForm extends javax.swing.JFrame {
 
         jLabel2.setText("Total Element :");
 
-        btn5Unit.setText("5 Unit");
+        btn5Unit.setText("5 inputs");
         btn5Unit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn5UnitActionPerformed(evt);
             }
         });
 
-        btn7Unit.setText("7 Unit");
+        btn7Unit.setText("7 inputs");
         btn7Unit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn7UnitActionPerformed(evt);
@@ -108,10 +108,10 @@ public class ImplementUnitForm extends javax.swing.JFrame {
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
                                 .addComponent(jScrollPane2))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(numberOfUnittf, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(98, 98, 98)
+                                .addGap(82, 82, 82)
                                 .addComponent(btn5Unit)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btn7Unit))))
