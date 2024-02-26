@@ -4,19 +4,7 @@
  */
 package commission;
 
-
-
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -32,7 +20,6 @@ public class ComissionForm extends javax.swing.JFrame {
     private Material locks;
     private Material stocks;
     private Material barrels;
-    
     
     /**
      * Creates new form ComissionForm
@@ -81,14 +68,14 @@ public class ComissionForm extends javax.swing.JFrame {
 
         jLabel5.setText("Barrel :");
 
-        btn5Unit.setText("5 inputs");
+        btn5Unit.setText("5 Unit");
         btn5Unit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn5UnitActionPerformed(evt);
             }
         });
 
-        btn7Unit.setText("7 inputs");
+        btn7Unit.setText("7 Unit");
         btn7Unit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn7UnitActionPerformed(evt);
@@ -178,7 +165,7 @@ public class ComissionForm extends javax.swing.JFrame {
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(stockQuantitytf, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                                         .addComponent(stockCost, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(51, 51, 51)
@@ -219,7 +206,7 @@ public class ComissionForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn5Unit)
                     .addComponent(btn7Unit))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         pack();
@@ -287,8 +274,6 @@ public class ComissionForm extends javax.swing.JFrame {
         allPart[1]= stocks.getUnits();
         allPart[2]= barrels.getUnits();
         int[] nom = new int[3];
-        List<Comission> testcases = new ArrayList<>();
-        
         int count=1;
         for(int i=0;i<3;i++){
             nom[0]=nomLock;
@@ -300,7 +285,6 @@ public class ComissionForm extends javax.swing.JFrame {
                 }else{
                     nom[i]=a;
                     model.addRow(new Object[]{count,nom[0],nom[1],nom[2],commission(nom[0], nom[1], nom[2])});
-                    testcases.add(new Comission(nom[0],nom[1],nom[2],commission(nom[0], nom[1], nom[2])));
                     count++;
                 }
             }
@@ -314,22 +298,8 @@ public class ComissionForm extends javax.swing.JFrame {
 
         // Add table to nestedFrame center
         tableFrame.add(scrollPane, BorderLayout.CENTER);
-        JButton button = new JButton();
-        button.setPreferredSize(new Dimension(100, 40));
-        button.setText("Export");
-        tableFrame.add(button, BorderLayout.SOUTH);
-        
         tableFrame.setVisible(true);
         
-        
-        button.addActionListener((ActionEvent e) -> {
-            String path = chooseDestination();
-            System.out.println(path + "/commissionTestcase.csv");
-            if (!path.isEmpty()) {
-                exportToCSV(path+ "/commissionTestcase.csv", testcases);
-                JOptionPane.showMessageDialog(rootPane, "Export to " + path + "/commissionTestcase.csv" + " successfully!");
-            }
-        });
     }
     public double commission(int lock,int stock, int barrel){
         double commission=0;
@@ -353,20 +323,6 @@ public class ComissionForm extends javax.swing.JFrame {
         
 		
         return commission;
-    }
-    
-    public void exportToCSV(String fileName, List<Comission> testcases)  {
-        
-            
-                try (FileWriter writer = new FileWriter(fileName)) {
-            for (Comission testcase : testcases) {
-                writer.append(testcase.getLock() + "," + testcase.getStock() + "," + testcase.getBarrel() + "," + testcase.getExpected() +"\n");
-            }
-            System.out.println("Test cases exported to " + fileName);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-            
     }
     public Material getMaterial(int unit,int max,int cost){
         mt = new Material(unit,max, cost);
@@ -397,17 +353,6 @@ public class ComissionForm extends javax.swing.JFrame {
             return true;
         }
         return false;
-    }
-    private static String chooseDestination() {
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-
-        int result = fileChooser.showOpenDialog(null);
-        String chosenPath = "";
-        if (result == JFileChooser.APPROVE_OPTION) {
-            chosenPath = fileChooser.getSelectedFile().getPath();
-        }
-        return chosenPath;
     }
     /**
      * @param args the command line arguments

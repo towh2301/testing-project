@@ -7,7 +7,6 @@ package com.myteam.triangle_4;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -16,7 +15,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.*;
 
 /**
  *
@@ -33,6 +31,8 @@ public class Triangle_4 extends javax.swing.JFrame {
     public Triangle_4() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.button5.setText("5 Unit");
+        this.button7.setText("7 Unit");
     }
 
     /**
@@ -148,7 +148,7 @@ public class Triangle_4 extends javax.swing.JFrame {
     }//GEN-LAST:event_button7ActionPerformed
 
     public void createTable(int input, int max, int min) {
-        JFrame nestedFrame = new JFrame(input + " Inputs");
+        JFrame nestedFrame = new JFrame(input + " Iputs");
         nestedFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         nestedFrame.setSize(400, 300);
         nestedFrame.setLocationRelativeTo(null);
