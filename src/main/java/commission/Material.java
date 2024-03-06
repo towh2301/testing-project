@@ -11,13 +11,15 @@ package commission;
 public final class Material {
     private int[] units;
     public int nom;
-    private int cost;
+    public int cost;
+    public int max;
     
 
    
 
     public Material(int unit,int max,int cost) {
         this.cost= cost;
+        this.max = max;
         int[] unit5 ={1,2,max/2,max-1,max};
         nom=max/2;
         int[] unit7 = {0,1,2,max/2,max-1,max,max+1};

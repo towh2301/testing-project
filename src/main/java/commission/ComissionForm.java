@@ -303,8 +303,8 @@ public class ComissionForm extends javax.swing.JFrame {
     }
     public double commission(int lock,int stock, int barrel){
         double commission=0;
-        double sales = lock *locks.nom + stock * stocks.nom + barrel*barrels.nom;
-        if(lock==0 || stock ==0 || barrel == 0){
+        double sales = lock *locks.cost + stock * stocks.cost + barrel*barrels.cost;
+        if(lock==0 || stock ==0 || barrel == 0 || lock > locks.max || (stock > stocks.max) || barrel > barrels.max){
             return 0;
         }
         if (sales>1800)
