@@ -16,11 +16,12 @@ import javax.swing.table.DefaultTableModel;
  * @author penta
  */
 public class ComissionForm extends javax.swing.JFrame {
+
     private Material mt;
     private Material locks;
     private Material stocks;
     private Material barrels;
-    
+
     /**
      * Creates new form ComissionForm
      */
@@ -218,7 +219,7 @@ public class ComissionForm extends javax.swing.JFrame {
     }//GEN-LAST:event_stockCostActionPerformed
 
     private void lockQuantitytfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lockQuantitytfKeyTyped
-                // TODO add your handling code here:
+        // TODO add your handling code here:
         checkValidNumber(evt);
     }//GEN-LAST:event_lockQuantitytfKeyTyped
 
@@ -227,7 +228,7 @@ public class ComissionForm extends javax.swing.JFrame {
     }//GEN-LAST:event_lockCostActionPerformed
 
     private void lockCostKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lockCostKeyTyped
-         checkValidNumber(evt);    // TODO add your handling code here:
+        checkValidNumber(evt);    // TODO add your handling code here:
     }//GEN-LAST:event_lockCostKeyTyped
 
     private void stockQuantitytfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_stockQuantitytfKeyTyped
@@ -244,52 +245,53 @@ public class ComissionForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         checkValidNumber(evt);
     }//GEN-LAST:event_barrelQuantityKeyTyped
-    public void checkValidNumber(java.awt.event.KeyEvent evt){
+    public void checkValidNumber(java.awt.event.KeyEvent evt) {
         char c = evt.getKeyChar();
-        if(!Character.isDigit(c)){
+        if (!Character.isDigit(c)) {
             evt.consume();
         }
     }
+
     public void createTable(int unit) {
         JFrame tableFrame = new JFrame();
         tableFrame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        tableFrame.setSize(400,300);
+        tableFrame.setSize(400, 300);
         tableFrame.setLocationRelativeTo(null);
-        
+
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Testcase");
         model.addColumn("Locks");
         model.addColumn("Stocks");
         model.addColumn("Barrels");
         model.addColumn("Expected");
-        
+
         locks = getMaterial(unit, Integer.parseInt(lockQuantitytf.getText()), Integer.parseInt(lockCost.getText()));
         stocks = getMaterial(unit, Integer.parseInt(stockQuantitytf.getText()), Integer.parseInt(stockCost.getText()));
         barrels = getMaterial(unit, Integer.parseInt(barrelQuantity.getText()), Integer.parseInt(barrelCost.getText()));
-        int nomLock = locks.getUnits()[unit/2];
-        int nomStock = stocks.getUnits()[unit/2];
-        int nomBarrel = barrels.getUnits()[unit/2];
+        int nomLock = locks.getUnits()[unit / 2];
+        int nomStock = stocks.getUnits()[unit / 2];
+        int nomBarrel = barrels.getUnits()[unit / 2];
         int[][] allPart = new int[3][];
-        allPart[0]= locks.getUnits();
-        allPart[1]= stocks.getUnits();
-        allPart[2]= barrels.getUnits();
+        allPart[0] = locks.getUnits();
+        allPart[1] = stocks.getUnits();
+        allPart[2] = barrels.getUnits();
         int[] nom = new int[3];
-        int count=1;
-        for(int i=0;i<3;i++){
-            nom[0]=nomLock;
-            nom[1]=nomStock;
-            nom[2]=nomBarrel;
-            for(int a:allPart[i]){
-                if(i!=0 && a==allPart[i][unit/2]){
+        int count = 1;
+        for (int i = 0; i < 3; i++) {
+            nom[0] = nomLock;
+            nom[1] = nomStock;
+            nom[2] = nomBarrel;
+            for (int a : allPart[i]) {
+                if (i != 0 && a == allPart[i][unit / 2]) {
                     continue;
-                }else{
-                    nom[i]=a;
-                    model.addRow(new Object[]{count,nom[0],nom[1],nom[2],commission(nom[0], nom[1], nom[2])});
+                } else {
+                    nom[i] = a;
+                    model.addRow(new Object[]{count, nom[0], nom[1], nom[2], commission(nom[0], nom[1], nom[2])});
                     count++;
                 }
             }
         }
-        
+
         JTable table = new JTable(model);
         JScrollPane scrollPane = new JScrollPane(table);
 
@@ -299,33 +301,33 @@ public class ComissionForm extends javax.swing.JFrame {
         // Add table to nestedFrame center
         tableFrame.add(scrollPane, BorderLayout.CENTER);
         tableFrame.setVisible(true);
-        
+
     }
-    public double commission(int lock,int stock, int barrel){
-        double commission=0;
-        double sales = lock *locks.cost + stock * stocks.cost + barrel*barrels.cost;
-        if(lock==0 || stock ==0 || barrel == 0 || lock > locks.max || (stock > stocks.max) || barrel > barrels.max){
+
+    public double commission(int lock, int stock, int barrel) {
+        double commission = 0;
+        double sales = lock * locks.cost + stock * stocks.cost
+                + barrel * barrels.cost;
+        if (lock == 0 || stock == 0 || barrel == 0 || lock > locks.max
+                || (stock > stocks.max) || barrel > barrels.max) {
             return 0;
         }
-        if (sales>1800)
-		{
-			commission=0.10*1000.0;
-			commission=commission+0.15*800;
-			commission=commission+0.20*(sales-1800.0);
-		}
-		else if(sales > 1000)
-			 {
-			commission =0.10*1000;
-			commission=commission+0.15*(sales-1000);
-			}
-		else
-			commission=0.10*sales;
-        
-		
+        if (sales > 1800) {
+            commission = 0.10 * 1000.0;
+            commission = commission + 0.15 * 800;
+            commission = commission + 0.20 * (sales - 1800.0);
+        } else if (sales > 1000) {
+            commission = 0.10 * 1000;
+            commission = commission + 0.15 * (sales - 1000);
+        } else {
+            commission = 0.10 * sales;
+        }
+
         return commission;
     }
-    public Material getMaterial(int unit,int max,int cost){
-        mt = new Material(unit,max, cost);
+
+    public Material getMaterial(int unit, int max, int cost) {
+        mt = new Material(unit, max, cost);
         return mt;
     }
     private void barrelCostKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_barrelCostKeyTyped
@@ -334,26 +336,27 @@ public class ComissionForm extends javax.swing.JFrame {
     }//GEN-LAST:event_barrelCostKeyTyped
 
     private void btn5UnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn5UnitActionPerformed
-        if(isZero()){
+        if (isZero()) {
             JOptionPane.showMessageDialog(rootPane, "All inputs must better than 0!!");
-        }else
-        createTable(5);
+        } else
+            createTable(5);
     }//GEN-LAST:event_btn5UnitActionPerformed
 
     private void btn7UnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn7UnitActionPerformed
-        if(isZero()){
+        if (isZero()) {
             JOptionPane.showMessageDialog(rootPane, "All inputs must better than 0!!");
-        }else
-        createTable(7);
+        } else
+            createTable(7);
     }//GEN-LAST:event_btn7UnitActionPerformed
-    public boolean isZero(){
-        if(Integer.parseInt(lockQuantitytf.getText())==0 || Integer.parseInt(stockCost.getText())==0 || Integer.parseInt(lockCost.getText())==0 
-                || Integer.parseInt(stockQuantitytf.getText())==0 || Integer.parseInt(barrelQuantity.getText())==0 
-                || Integer.parseInt(barrelCost.getText())==0) {
+    public boolean isZero() {
+        if (Integer.parseInt(lockQuantitytf.getText()) == 0 || Integer.parseInt(stockCost.getText()) == 0 || Integer.parseInt(lockCost.getText()) == 0
+                || Integer.parseInt(stockQuantitytf.getText()) == 0 || Integer.parseInt(barrelQuantity.getText()) == 0
+                || Integer.parseInt(barrelCost.getText()) == 0) {
             return true;
         }
         return false;
     }
+
     /**
      * @param args the command line arguments
      */
